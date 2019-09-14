@@ -4,27 +4,35 @@
 			v-if="!this.isLoading"
 			:img-src="this.pokemon.sprites.front_default"
 			:img-alt="this.pokemon.name"
-			:bg-variant="this.cardColor" 
-			text-variant="white"
+			bg-variant="secondary" 
+			text-variant="white" 
 			img-top
 			tag="article"
 			style="min-width: 10rem;"
 			class="text-center mb-3"
 		>
-			<b-card-title class="name">
+			<b-card-title class="text-capitalize">
 				{{ this.pokemon.name }}
 			</b-card-title>
 			<b-card-text>
-				<p>{{ this.pokemon.types[0].type.name }}</p>
+				  <b-badge 
+						v-for="typeData in this.pokemon.types" 
+						v-bind:key="typeData.slot" 
+						variant="light"
+						class="text-capitalize mr-md-1"
+					>
+						{{ typeData.type.name }}
+					</b-badge>
 			</b-card-text>
 		</b-card>
 		<b-card 
 			v-else
-			class="overflow-hidden" 
-			style="max-width: 540px;"
+			class="text-center mb-3"
+			style="min-width: 10rem; min-height: 16rem"
 			text-variant="white"
+			bg-variant="secondary" 
 		>
-			<b-spinner variant="primary" label="Spinning"></b-spinner>
+			<b-spinner variant="light" label="Spinning"></b-spinner>
     </b-card>
   </div>
 </template>
@@ -47,9 +55,9 @@
     },
     created() {
         api.get(`pokemon/${this.name}`).then(response => { 
-						this.isLoading = false
-						this.pokemon = response.data
-						this.resolveCardColor(response.data)
+					this.isLoading = false
+					this.pokemon = response.data
+					this.resolveCardColor(response.data)
         })
     },
     methods: {
@@ -70,7 +78,5 @@
 </script>
 
 <style scoped>
-.name {
-    text-transform: capitalize
-}
+
 </style>

@@ -1,5 +1,7 @@
 # pokedex-vue
 
+Simple Vue Pokedex. Studies purpose only.
+
 ## Project setup
 ```
 yarn install

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-card-group deck v-if="!this.isLoading">
+  <div class="col-sm-12">
+    <b-card-group deck v-if="!this.isLoading" class="text-center">
       <PokemonCard 
         v-for="pokemon in this.pokemons"
         v-bind:key="pokemon.name"

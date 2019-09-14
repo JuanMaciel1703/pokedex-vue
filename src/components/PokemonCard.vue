@@ -8,7 +8,7 @@
 			text-variant="white" 
 			img-top
 			tag="article"
-			style="min-width: 10rem;"
+			style="min-width: 15rem;"
 			class="text-center mb-3"
 		>
 			<b-card-title class="text-capitalize">

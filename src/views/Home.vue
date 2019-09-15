@@ -1,12 +1,17 @@
 <template>
-  <div class="col-sm-12">
-    <b-card-group deck v-if="!this.isLoading" class="text-center">
-      <PokemonCard 
-        v-for="pokemon in this.pokemons"
-        v-bind:key="pokemon.name"
-        v-bind:name="pokemon.name"
+  <div>
+    <b-card-group deck v-if="!this.isLoading" class="text-center col-sm-12">
+      <a 
+      v-on:click="openModal(pokemon.name)"
+      v-for="pokemon in this.pokemons"
+      v-bind:key="pokemon.name"
       >
-      </PokemonCard>
+        <PokemonCard 
+          v-bind:name="pokemon.name"
+        >
+        </PokemonCard>
+      </a>
+      <PokemonDataModal ref="modal"/>
     </b-card-group>
     <div v-else>
 			<b-spinner 
@@ -23,6 +28,7 @@
 <script>
   import api from '@/services/Api'
   import PokemonCard from '@/components/PokemonCard'
+	import PokemonDataModal from '@/components/PokemonDataModal'
 
   export default {
     data() {
@@ -40,8 +46,14 @@
         })
       }, 1000);
     },
+    methods: {
+      openModal(data) {
+        this.$refs.modal.show(data)
+      }
+    },
     components: {
-      PokemonCard
+      PokemonCard,
+      PokemonDataModal
     }
   }
 </script>

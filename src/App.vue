@@ -3,7 +3,7 @@
     <div id="nav">
       <Navbar></Navbar>
     </div>
-    <div id="main" class="container mt-4 mb-5  d-flex h-100">
+    <div id="main" class="container mt-4 mb-5">
       <router-view/> <!-- Renderiza o componente de acordo com a rota -->
     </div>
     <div id="footer">

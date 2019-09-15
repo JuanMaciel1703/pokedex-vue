@@ -6,12 +6,11 @@
 			:img-alt="this.pokemon.name"
 			bg-variant="secondary" 
 			text-variant="white" 
-			img-top
+			img-left
 			tag="article"
-			style="min-width: 15rem;"
-			class="text-center mb-3"
+			class="text-center mb-3 card"
 		>
-			<b-card-title class="text-capitalize">
+			<b-card-title class="text-capitalize h5">
 				{{ this.pokemon.name }}
 			</b-card-title>
 			<b-card-text>
@@ -32,51 +31,59 @@
 			text-variant="white"
 			bg-variant="secondary" 
 		>
-			<b-spinner variant="light" label="Spinning"></b-spinner>
+			<b-spinner variant="light" label="Spinning" class="centered-element"></b-spinner>
     </b-card>
   </div>
 </template>
 
 <script>
-  import api from '../services/Api'
+	import pokemonService from '@/services/PokemonService'
+	
   export default {
     props: {
       name: {
         type: String,
         required: true
-      }
-    },
+			}
+		},
     data() {
       return {
 				isLoading: true,
-				cardColor: 'Default',
         pokemon: {} 
       }
     },
     created() {
-        api.get(`pokemon/${this.name}`).then(response => { 
+			setTimeout(() => {
+				pokemonService.getPokemonData(this.name).then(response => {
+					this.pokemon = response
 					this.isLoading = false
-					this.pokemon = response.data
-					this.resolveCardColor(response.data)
-        })
-    },
-    methods: {
-     resolveCardColor 
-    }
-	}
-	
-	function resolveCardColor(pokemon) {
-		let color = 'Default'
-		const primaryType = pokemon.types[0].type.name
-
-		switch (primaryType) {
-			case 'flying':
-				color = 'Primary'
+				})
+			}, 1000);
+		},
+		methods: {
+				openModal(name) {
+					
+			}
 		}
-		this.cardColor = color
 	}
 </script>
 
 <style scoped>
+.card {
+	width: 20rem;
+}
 
+.card-body {
+	padding: 1.25rem 0;
+}
+
+.centered-element {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+}
 </style>

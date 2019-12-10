@@ -2,6 +2,9 @@
 
 Simple Vue Pokedex. Studies purpose only.
 
+### Beta DEMO
+https://vuedex.herokuapp.com/
+
 ## Project setup
 ```
 yarn install
